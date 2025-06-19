@@ -11,6 +11,16 @@ const quicksand = Quicksand({
 export const metadata: Metadata = {
   title: 'MoodGroove - Your Mood-Based Music Companion',
   description: 'Create personalized playlists based on your mood using Spotify',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
 }
 
 export default function RootLayout({

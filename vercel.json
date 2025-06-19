@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "SPOTIFY_CLIENT_ID": "4104abbe70b0447aa14b2172e92b6db3",
+    "SPOTIFY_CLIENT_SECRET": "a801bea7319145b9a57b6211c3f323db",
+    "NEXTAUTH_URL": "https://mood-groov.vercel.app",
+    "NEXTAUTH_SECRET": "your-next-auth-secret"
+  }
+}
