@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MoodGroove - Mood-Based Playlist Generator
 
 MoodGroove is a web application that creates personalized Spotify playlists based on your mood. Using the Spotify API, it generates playlists that match your current emotional state and musical preferences.
@@ -59,3 +60,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 
+=======
+# MoodGroov
+>>>>>>> bfc5ec2bbc168d94266c5fd80924caf1a1849a1b
