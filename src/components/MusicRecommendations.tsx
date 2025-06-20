@@ -10,7 +10,13 @@ interface Track {
   albumArt: string;
 }
 
-const moodToGenres: Record<string, string[]> = {
+type Mood = 'Happy' | 'Sad' | 'Energetic' | 'Chill' | 'Romantic';
+
+interface Props {
+  selectedMood: Mood;
+}
+
+const moodToGenres: Record<Mood, string[]> = {
   'Happy': ['pop', 'dance', 'happy'],
   'Sad': ['sad', 'acoustic', 'soul'],
   'Energetic': ['edm', 'rock', 'workout'],
@@ -18,15 +24,17 @@ const moodToGenres: Record<string, string[]> = {
   'Romantic': ['romance', 'r-n-b', 'soul'],
 };
 
-const moodToColors = {
-  'Happy': 'from-yellow-400 to-orange-500',
-  'Sad': 'from-blue-400 to-purple-500',
-  'Energetic': 'from-red-400 to-pink-500',
-  'Chill': 'from-green-400 to-teal-500',
-  'Romantic': 'from-pink-400 to-red-500',
+const moodGradients: Record<Mood, string> = {
+  'Happy': 'from-yellow-500 to-orange-500',
+  'Sad': 'from-blue-500 to-purple-500',
+  'Energetic': 'from-red-500 to-pink-500',
+  'Chill': 'from-green-500 to-teal-500',
+  'Romantic': 'from-pink-500 to-purple-500',
 };
 
-export default function MusicRecommendations({ selectedMood }: { selectedMood: string }) {
+
+
+export default function MusicRecommendations({ selectedMood }: Props) {
   const { data: session } = useSession();
   const [recommendations, setRecommendations] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
@@ -108,7 +116,7 @@ export default function MusicRecommendations({ selectedMood }: { selectedMood: s
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className={`bg-gradient-to-r ${moodToColors[selectedMood]} bg-opacity-10 rounded-lg p-4 hover:bg-opacity-20 transition-all`}
+                  className={`bg-gradient-to-r ${moodGradients[selectedMood as Mood]} bg-opacity-10 rounded-lg p-4 hover:bg-opacity-20 transition-all`}
                 >
                   <div className="flex items-center space-x-4">
                     <Image
