@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'MoodGroov - Mood Based Playlist Creator',
   description: 'Create Spotify playlists based on your mood with advanced filtering options',
+  metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:3000'),
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
@@ -16,12 +17,12 @@ export const metadata: Metadata = {
   viewport: {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
+    maximumScale: 5,
+    userScalable: true,
   },
   openGraph: {
     title: 'MoodGroov - Mood Based Playlist Creator',
     description: 'Create Spotify playlists based on your mood with advanced filtering options',
-    url: 'https://mood-groov.vercel.app',
     siteName: 'MoodGroov',
     type: 'website',
   },

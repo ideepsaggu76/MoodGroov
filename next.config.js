@@ -4,6 +4,15 @@ const nextConfig = {
   reactStrictMode: true,
   // Required for Heroku deployment
   output: 'standalone',
+  experimental: {
+    // Ensure critters is included in the build
+    optimizeCss: true,
+    // For improved build performance
+    turbotrace: {
+      logLevel: 'error',
+      logAll: true,
+    }
+  },
   // Optimize images
   images: {
     domains: [
