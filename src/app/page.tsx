@@ -7,7 +7,8 @@ import Image from 'next/image'
 const features = [
   {
     title: 'Mood-Based Discovery',
-    description: "Tell us how you feel, and we'll create the perfect playlist to match your mood.",    icon: '/images/sync.png'
+    description: "Tell us how you feel, and we'll create the perfect playlist to match your mood.",
+    icon: '/images/sync.png'
   },
   {
     title: 'AI-Powered Curation',
@@ -21,9 +22,10 @@ const features = [
   },
 ]
 
-export default function Home() {  const handleLogin = () => {
+export default function Home() {
+  const handleLogin = () => {
     signIn('spotify', { 
-      callbackUrl: 'https://mood-groov-iubuihsfz-ideepsaggu76s-projects.vercel.app/dashboard'
+      callbackUrl: 'https://moodgroov-f0785e407312.herokuapp.com/dashboard'
     })
   }
 

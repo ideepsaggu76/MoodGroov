@@ -26,7 +26,7 @@ interface ExtendedSession {
 }
 
 // Always use the production URL, regardless of environment
-const PRODUCTION_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://mood-groov.vercel.app'
+const PRODUCTION_URL = process.env.NEXTAUTH_URL || 'https://moodgroov-f0785e407312.herokuapp.com'
 const CALLBACK_URL = `${PRODUCTION_URL}/api/auth/callback/spotify`
 
 const scopes = [
@@ -51,7 +51,7 @@ spotifyProvider.authorization = {
   url: "https://accounts.spotify.com/authorize",
   params: {
     scope: scopes,
-    redirect_uri: "https://mood-groov.vercel.app/api/auth/callback/spotify"
+    redirect_uri: "https://moodgroov-f0785e407312.herokuapp.com/api/auth/callback/spotify"
   }
 }
 

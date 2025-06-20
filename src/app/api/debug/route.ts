@@ -5,7 +5,7 @@ export async function GET() {
   
   return NextResponse.json({
     spotify_callback: spotifyCallback,
-    current_url: process.env.VERCEL_URL,
+    current_url: process.env.NEXTAUTH_URL,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     callback_url: process.env.NEXTAUTH_URL + '/api/auth/callback/spotify',
     NODE_ENV: process.env.NODE_ENV
