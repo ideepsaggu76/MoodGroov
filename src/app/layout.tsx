@@ -14,18 +14,19 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   openGraph: {
     title: 'MoodGroov - Mood Based Playlist Creator',
     description: 'Create Spotify playlists based on your mood with advanced filtering options',
     siteName: 'MoodGroov',
     type: 'website',
   },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 }
 
 export default function RootLayout({
