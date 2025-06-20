@@ -2,6 +2,8 @@
 const nextConfig = {
   // Enable static optimization
   reactStrictMode: true,
+  // Required for Heroku deployment
+  output: 'standalone',
   // Optimize images
   images: {
     domains: [
