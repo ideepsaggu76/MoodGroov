@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import DashboardHeader from '@/components/DashboardHeader'
 import MoodSelector from '@/components/MoodSelector'
 import PlaylistCustomization from '@/components/PlaylistCustomization'
+import MusicRecommendations from '@/components/MusicRecommendations'
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
