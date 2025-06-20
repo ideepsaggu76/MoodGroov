@@ -6,9 +6,9 @@ export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' https://accounts.scdn.co https://*.spotify.com;
+    script-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://accounts.scdn.co https://*.spotify.com;
     style-src 'self' 'unsafe-inline';
-    img-src 'self' data: https://*.spotify.com https://*.scdn.co;
+    img-src 'self' data: blob: https://*.spotify.com https://*.scdn.co;
     font-src 'self';
     object-src 'none';
     base-uri 'self';
@@ -20,10 +20,12 @@ export function middleware(request: NextRequest) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-nonce', nonce)
-  requestHeaders.set(
-    'Content-Security-Policy',
-    cspHeader
-  )
+  requestHeaders.set('Content-Security-Policy', cspHeader)
+
+  // Only apply middleware to pages, not api routes
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return NextResponse.next()
+  }
 
   const response = NextResponse.next({
     request: {
@@ -31,25 +33,10 @@ export function middleware(request: NextRequest) {
     }
   })
 
-  response.headers.set(
-    'Content-Security-Policy',
-    cspHeader
-  )
-
+  response.headers.set('Content-Security-Policy', cspHeader)
   return response
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|images).*)'
-  ]
-     */
-    {
-      source: '/((?!api|_next/static|_next/image|favicon.ico|images/).*)',
-      missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
-      ],
-    },
-  ],
+  matcher: '/((?!_next/static|_next/image|favicon.ico|images/|api/).*)'
 }
