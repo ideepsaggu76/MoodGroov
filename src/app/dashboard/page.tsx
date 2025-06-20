@@ -112,8 +112,7 @@ export default function DashboardPage() {
               </motion.p>
             </div>
             
-            <MoodSelector />
-            <PlaylistCustomization />
+            <MoodSelector />            <PlaylistCustomization />
           </section>
 
           <motion.section
@@ -145,29 +144,7 @@ export default function DashboardPage() {
               </h3>
             </div>
             
-            <div className="space-y-4">
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-white/60 text-lg"
-              >
-                Select your mood and preferences to generate a playlist that matches your vibe ✨
-              </motion.p>
-              
-              {/* Placeholder for generated playlist */}
-              <div className="mt-8 space-y-4">
-                {[...Array(3)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 0.5, x: 0 }}
-                    transition={{ delay: 0.4 + i * 0.1 }}
-                    className="h-16 bg-white/5 rounded-xl animate-pulse"
-                  />
-                ))}
-              </div>
-            </div>
+            <MusicRecommendations selectedMood="Happy" />
           </motion.section>
         </motion.div>
       </main>

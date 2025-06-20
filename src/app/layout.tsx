@@ -1,16 +1,13 @@
 import type { Metadata } from 'next'
-import { Quicksand } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 
-const quicksand = Quicksand({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700']
-})
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'MoodGroove - Your Mood-Based Music Companion',
-  description: 'Create personalized playlists based on your mood using Spotify',
+  title: 'MoodGroov - Mood Based Playlist Creator',
+  description: 'Create Spotify playlists based on your mood with advanced filtering options',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
@@ -21,6 +18,13 @@ export const metadata: Metadata = {
     initialScale: 1,
     maximumScale: 1,
   },
+  openGraph: {
+    title: 'MoodGroov - Mood Based Playlist Creator',
+    description: 'Create Spotify playlists based on your mood with advanced filtering options',
+    url: 'https://mood-groov.vercel.app',
+    siteName: 'MoodGroov',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
@@ -29,12 +33,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={quicksand.className}>
+    <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className={inter.className}>
         <Providers>
           {children}
         </Providers>
       </body>
     </html>
   )
-} 
+}

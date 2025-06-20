@@ -1,0 +1,46 @@
+import NextAuth from 'next-auth'
+import SpotifyProvider from 'next-auth/providers/spotify'
+
+const scopes = [
+  'user-read-email',
+  'user-read-private',
+  'playlist-modify-public',
+  'playlist-modify-private',
+  'user-library-read',
+  'user-library-modify',
+  'user-top-read',
+  'playlist-read-private'
+].join(' ')
+
+const handler = NextAuth({
+  providers: [
+    SpotifyProvider({
+      clientId: "4104abbe70b0447aa14b2172e92b6db3",
+      clientSecret: "a801bea7319145b9a57b6211c3f323db",
+      authorization: {
+        params: { scope: scopes }
+      }
+    })
+  ],
+  secret: "K3TIHeZmNPcj5gvCfnSqQuF816n0A448obKlROzLlbF8=",
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.accessToken = account.access_token
+        token.refreshToken = account.refresh_token
+      }
+      return token
+    },
+    async session({ session, token }: { session: any; token: any }) {
+      session.user.accessToken = token.accessToken
+      session.user.refreshToken = token.refreshToken
+      return session
+    },
+    async redirect() {
+      // Always redirect to production dashboard
+      return "https://mood-groov.vercel.app/dashboard"
+    }
+  }
+})
+
+export { handler as GET, handler as POST }

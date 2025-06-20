@@ -4,7 +4,13 @@ const nextConfig = {
   reactStrictMode: true,
   // Optimize images
   images: {
-    domains: ['i.scdn.co', 'accounts.scdn.co'], // Allow Spotify image domains
+    domains: [
+      'i.scdn.co',
+      'mosaic.scdn.co',
+      'platform-lookaside.fbsbx.com',
+      'api.spotify.com',
+      'accounts.spotify.com'
+    ],
     unoptimized: process.env.NODE_ENV === 'development'
   },
   // Security headers
@@ -23,7 +29,7 @@ const nextConfig = {
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'DENY'
           },
           {
             key: 'X-Content-Type-Options',
@@ -54,4 +60,6 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['@mantine/core', '@mantine/hooks', 'framer-motion']
   }
-} 
+}
+
+module.exports = nextConfig
