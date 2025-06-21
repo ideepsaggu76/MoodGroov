@@ -5,10 +5,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import DashboardHeader from '@/components/DashboardHeader'
-import MoodSelector from '@/components/MoodSelector'
-import PlaylistCustomization from '@/components/PlaylistCustomization'
-import MusicRecommendations from '@/components/MusicRecommendations'
+// import DashboardHeader from '@/components/DashboardHeader'
+// import MoodSelector from '@/components/MoodSelector'
+// import PlaylistCustomization from '@/components/PlaylistCustomization'
+// import MusicRecommendations from '@/components/MusicRecommendations'
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
@@ -91,70 +91,20 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      <DashboardHeader />
+      {/* <DashboardHeader /> */}
       
       <main className="container mx-auto px-4 py-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
-          <section className="space-y-8">
-            <div className="space-y-4">
-              <motion.h2
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="text-4xl font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent"
-              >
-                Create Your Mood Playlist
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-lg text-white/70"
-              >
-                Select or describe your mood, and let us create the perfect playlist for you
-              </motion.p>
-            </div>
-            
-            <MoodSelector />            <PlaylistCustomization />
-          </section>
-
-          <motion.section
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-black/20 backdrop-blur-md rounded-2xl p-8 border-2 border-white/10
-                     sticky top-8 h-fit max-h-[calc(100vh-4rem)] overflow-y-auto
-                     scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
-          >
-            <div className="flex items-center space-x-4 mb-8">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-accent-mint to-accent-powder
-                         flex items-center justify-center"
-              >
-                <Image
-                  src="/images/playlist.png"
-                  alt="Playlist"
-                  width={32}
-                  height={32}
-                  className="object-contain"
-                />
-              </motion.div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
-                Your Generated Playlist
-              </h3>
-            </div>
-            
-            <MusicRecommendations selectedMood="Happy" />
-          </motion.section>
+          <h1 className="text-4xl font-bold mb-4">Welcome to your dashboard</h1>
+          {/* <MoodSelector /> */}
+          {/* <PlaylistCustomization /> */}
+          {/* <MusicRecommendations /> */}
         </motion.div>
       </main>
     </div>
   )
-} 
+}

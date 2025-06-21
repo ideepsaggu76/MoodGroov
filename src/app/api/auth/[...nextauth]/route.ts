@@ -46,15 +46,6 @@ const spotifyProvider = SpotifyProvider({
   authorization: `https://accounts.spotify.com/authorize?scope=${encodeURIComponent(scopes)}`
 })
 
-// Override the provider's authorization and token endpoints
-spotifyProvider.authorization = {
-  url: "https://accounts.spotify.com/authorize",
-  params: {
-    scope: scopes,
-    redirect_uri: "https://moodgroov-7ff0d88d9dcc.herokuapp.com/api/auth/callback/spotify"
-  }
-}
-
 const handler = NextAuth({
   providers: [spotifyProvider],
   secret: process.env.NEXTAUTH_SECRET,
@@ -87,29 +78,7 @@ const handler = NextAuth({
       if (extendedToken.id) extendedSession.user.id = extendedToken.id;
         return extendedSession;
     },
-    async redirect({ url, baseUrl }) {
-      // Always redirect to dashboard after authentication
-      const productionUrl = PRODUCTION_URL;
-      
-      // If it's a callback or signin, go to dashboard
-      if (url.includes('/api/auth/callback') || url.includes('/api/auth/signin')) {
-        return `${productionUrl}/dashboard`;
-      }
-      
-      // If URL starts with /, make it absolute
-      if (url.startsWith('/')) {
-        return `${productionUrl}${url}`;
-      }
-      
-      // If it's already an absolute URL to our domain, allow it
-      if (url.startsWith(productionUrl)) {
-        return url;
-      }
-      
-      // Default fallback to dashboard
-      return `${productionUrl}/dashboard`;
-    }
-  }
-})
+  },
+});
 
 export { handler as GET, handler as POST }
