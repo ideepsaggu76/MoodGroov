@@ -11,7 +11,8 @@ const nextConfig = {
     turbotrace: {
       logLevel: 'error',
       logAll: true,
-    }
+    },
+    optimizePackageImports: ['@mantine/core', '@mantine/hooks']
   },
   // Optimize images
   images: {
@@ -66,11 +67,6 @@ const nextConfig = {
     }
     return config
   },
-  // Experimental features for faster compilation
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@mantine/core', '@mantine/hooks', 'framer-motion']
-  }
 }
 
 module.exports = nextConfig

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const spotifyCallback = "https://moodgroov-f0785e407312.herokuapp.com/api/auth/callback/spotify"
+  const spotifyCallback = "https://moodgroov-7ff0d88d9dcc.herokuapp.com/api/auth/callback/spotify"
   
   return NextResponse.json({
     spotify_callback: spotifyCallback,

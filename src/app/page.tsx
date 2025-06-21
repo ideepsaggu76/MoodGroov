@@ -22,10 +22,9 @@ const features = [
   },
 ]
 
-export default function Home() {
-  const handleLogin = () => {
+export default function Home() {  const handleLogin = () => {
     signIn('spotify', { 
-      callbackUrl: 'https://moodgroov-f0785e407312.herokuapp.com/dashboard'
+      callbackUrl: 'https://moodgroov-7ff0d88d9dcc.herokuapp.com/dashboard'
     })
   }
 
