@@ -91,27 +91,26 @@ const handler = NextAuth({
       if (extendedToken.id) extendedSession.user.id = extendedToken.id;
       
       return extendedSession;
-    },
-    async redirect({ url, baseUrl }) {
-      // Ensure all redirects go to the production URL
+    },    async redirect({ url, baseUrl }) {
+      // Always redirect to dashboard after authentication
       const productionUrl = PRODUCTION_URL;
       
-      // After sign in, always redirect to dashboard
-      if (url.startsWith('/api/auth/signin')) {
+      // If it's a callback or signin, go to dashboard
+      if (url.includes('/api/auth/callback') || url.includes('/api/auth/signin')) {
         return `${productionUrl}/dashboard`;
       }
       
-      // Handle callback URLs
-      if (url.includes('/api/auth/callback')) {
-        return `${productionUrl}/dashboard`;
-      }
-      
-      // Handle relative URLs
+      // If URL starts with /, make it absolute
       if (url.startsWith('/')) {
         return `${productionUrl}${url}`;
       }
       
-      // Default to dashboard
+      // If it's already an absolute URL to our domain, allow it
+      if (url.startsWith(productionUrl)) {
+        return url;
+      }
+      
+      // Default fallback to dashboard
       return `${productionUrl}/dashboard`;
     }
   }

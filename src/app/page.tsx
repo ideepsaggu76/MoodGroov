@@ -1,6 +1,8 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
+import { useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -22,7 +24,18 @@ const features = [
   },
 ]
 
-export default function Home() {  const handleLogin = () => {
+export default function Home() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  // Redirect to dashboard if already logged in
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/dashboard')
+    }
+  }, [status, router])
+
+  const handleLogin = () => {
     signIn('spotify', { 
       callbackUrl: 'https://moodgroov-7ff0d88d9dcc.herokuapp.com/dashboard'
     })

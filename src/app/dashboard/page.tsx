@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import DashboardHeader from '@/components/DashboardHeader'
@@ -12,12 +12,13 @@ import MusicRecommendations from '@/components/MusicRecommendations'
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
+  const router = useRouter()
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      redirect('/')
+      router.push('/')
     }
-  }, [status])
+  }, [status, router])
 
   if (status === 'loading') {
     return (
