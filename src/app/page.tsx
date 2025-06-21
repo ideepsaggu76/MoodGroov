@@ -28,16 +28,22 @@ export default function Home() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
+  // Debug logging
+  console.log('Landing page - Session status:', status, 'Session:', session)
+
   // Redirect to dashboard if already logged in
   useEffect(() => {
+    console.log('Landing page useEffect - Status:', status)
     if (status === 'authenticated') {
+      console.log('User is authenticated, redirecting to dashboard')
       router.push('/dashboard')
     }
   }, [status, router])
 
   const handleLogin = () => {
+    console.log('Login button clicked')
     signIn('spotify', { 
-      callbackUrl: 'https://moodgroov-7ff0d88d9dcc.herokuapp.com/dashboard'
+      callbackUrl: '/dashboard'
     })
   }
 

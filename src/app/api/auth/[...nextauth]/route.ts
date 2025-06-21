@@ -61,13 +61,9 @@ const handler = NextAuth({
   session: {
     strategy: 'jwt'
   },
-  pages: {
-    signIn: '/',
-    signOut: '/',
-    error: '/'
-  },
-  callbacks: {
-    async signIn({ user, account, profile }) {
+  debug: true, // Enable debug mode
+  callbacks: {    async signIn({ user, account, profile }) {
+      console.log('SignIn callback triggered', { user, account, profile });
       return true;
     },
     async jwt({ token, account, profile }) {
@@ -89,9 +85,9 @@ const handler = NextAuth({
       if (extendedToken.accessToken) extendedSession.user.accessToken = extendedToken.accessToken;
       if (extendedToken.refreshToken) extendedSession.user.refreshToken = extendedToken.refreshToken;
       if (extendedToken.id) extendedSession.user.id = extendedToken.id;
-      
-      return extendedSession;
-    },    async redirect({ url, baseUrl }) {
+        return extendedSession;
+    },
+    async redirect({ url, baseUrl }) {
       // Always redirect to dashboard after authentication
       const productionUrl = PRODUCTION_URL;
       
