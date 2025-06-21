@@ -68,8 +68,7 @@ const handler = NextAuth({
         }
       }
       return token;
-    },
-    async session({ session, token }) {
+    },    async session({ session, token }) {
       const extendedToken = token as ExtendedToken;
       const extendedSession = session as ExtendedSession;
       
@@ -77,6 +76,23 @@ const handler = NextAuth({
       if (extendedToken.refreshToken) extendedSession.user.refreshToken = extendedToken.refreshToken;
       if (extendedToken.id) extendedSession.user.id = extendedToken.id;
         return extendedSession;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log('Redirect callback:', { url, baseUrl });
+      // If it's a callback, redirect to dashboard
+      if (url.includes('/api/auth/callback')) {
+        return `${baseUrl}/dashboard`;
+      }
+      // If URL starts with /, make it absolute
+      if (url.startsWith('/')) {
+        return `${baseUrl}${url}`;
+      }
+      // If same origin, allow it
+      if (new URL(url).origin === baseUrl) {
+        return url;
+      }
+      // Default to dashboard
+      return `${baseUrl}/dashboard`;
     },
   },
 });

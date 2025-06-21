@@ -13,16 +13,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function DashboardPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
-
   // Debug logging
   console.log('Dashboard - Session status:', status, 'Session:', session)
 
   useEffect(() => {
     console.log('Dashboard useEffect - Status:', status)
-    if (status === 'unauthenticated') {
-      console.log('User is not authenticated, redirecting to home')
-      router.push('/')
-    }
+    // Don't redirect immediately, just log for debugging
   }, [status, router])
 
   if (status === 'loading') {

@@ -27,18 +27,11 @@ const features = [
 export default function Home() {
   const { data: session, status } = useSession()
   const router = useRouter()
-
   // Debug logging
   console.log('Landing page - Session status:', status, 'Session:', session)
 
-  // Redirect to dashboard if already logged in
-  useEffect(() => {
-    console.log('Landing page useEffect - Status:', status)
-    if (status === 'authenticated') {
-      console.log('User is authenticated, redirecting to dashboard')
-      router.push('/dashboard')
-    }
-  }, [status, router])
+  // Show dashboard link if already logged in instead of auto-redirecting
+  const isAuthenticated = status === 'authenticated'
 
   const handleLogin = () => {
     console.log('Login button clicked')
@@ -103,15 +96,14 @@ export default function Home() {
               className="text-xl text-gray-600 mb-8"
             >
               Your personal music companion that understands your mood
-            </motion.p>
-            <motion.button
+            </motion.p>            <motion.button
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
-              onClick={handleLogin}
+              onClick={isAuthenticated ? () => router.push('/dashboard') : handleLogin}
               className="bg-[#1DB954] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#1ed760] transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#1DB954]/20"
             >
-              Connect with Spotify
+              {isAuthenticated ? 'Go to Dashboard' : 'Connect with Spotify'}
             </motion.button>
           </div>
 
